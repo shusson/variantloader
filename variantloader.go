@@ -46,7 +46,7 @@ func InitDb(file string, dbName string, tName string, clean bool, db *sql.DB) {
 }
 
 func dropDatabase(dbName string, db *sql.DB) {
-	_, err := db.Exec("DROP DATABASE " + dbName)
+	_, err := db.Exec("DROP DATABASE IF EXISTS " + dbName)
 	check(err)
 	fmt.Printf("Dropped db %s\n", dbName)
 }
