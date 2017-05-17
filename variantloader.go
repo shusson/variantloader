@@ -14,11 +14,13 @@ func main() {
 	var dbName string
 	var tName string
 	var clean bool
+	var connectionCheck bool
 	flag.StringVar(&dsn, "d", "root:root@tcp(127.0.0.1:3306)/", "mysql dsn: [username[:password]@][protocol[(address)]]/dbname[?param1=value1&...&paramN=valueN]")
 	flag.StringVar(&file, "f", "/data/test.tsv", "path to tsv file to be loaded from the perspective of the sql server")
 	flag.StringVar(&dbName, "db", "v", "name of database to create")
 	flag.StringVar(&tName, "t", "vs", "name of table to create and load into")
 	flag.BoolVar(&clean, "c", false, "if true will drop existing db and table")
+	flag.BoolVar(&connectionCheck, "u", false, "Connect to database and exit")
 
 	flag.Usage = func() {
 		fmt.Printf("Usage of %s:\n", os.Args[0])
@@ -31,6 +33,11 @@ func main() {
 	defer db.Close()
 	err = db.Ping()
 	check(err)
+
+	if connectionCheck {
+		fmt.Println("Connected")
+		return
+	}
 
 	InitDb(file, dbName, tName, clean, db)
 
