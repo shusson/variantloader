@@ -32,6 +32,11 @@ func main() {
 	err = db.Ping()
 	check(err)
 
+	InitDb(file, dbName, tName, clean, db)
+
+}
+
+func InitDb(file string, dbName string, tName string, clean bool, db *sql.DB) {
 	if clean {
 		dropDatabase(dbName, db)
 	}
