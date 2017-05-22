@@ -72,12 +72,12 @@ func createDatabase(dbName string, db *sql.DB) {
 func createTable(tName string, db *sql.DB) {
 
 	_, err := db.Exec(fmt.Sprintf(`CREATE TABLE %s (
+		id TEXT,
 		chromosome VARCHAR(2),
 		start INT,
 		reference TEXT,
 		alternate TEXT,
 		dbSNP TEXT,
-		callRate DECIMAL(6,5),
 		AC INT,
 		AF DECIMAL(6,5),
 		nCalled INT,
@@ -85,15 +85,10 @@ func createTable(tName string, db *sql.DB) {
 		nHomRef INT,
 		nHet INT,
 		nHomVar INT,
-		dpMean TEXT,
-		dpStDev TEXT,
-		gqMean TEXT,
-		gqStDev TEXT,
-		nNonRef INT,
-		rHeterozygosity DECIMAL(6,5),
-		rHetHomVar TEXT,
-		rExpectedHetFrequency DECIMAL(6,5),
-		pHWE FLOAT(12),
+		TYPE VARCHAR(32),
+		CONSEQUENCE TEXT,
+		SYMBOL TEXT,
+		EXAC_MAF TEXT,
 		INDEX name (chromosome, start)
 	)`, tName))
 	check(err)
