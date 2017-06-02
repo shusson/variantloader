@@ -86,9 +86,6 @@ func createTable(tName string, db *sql.DB) {
 		nHet INT,
 		nHomVar INT,
 		TYPE VARCHAR(32),
-		CONSEQUENCE TEXT,
-		SYMBOL TEXT,
-		EXAC_MAF TEXT,
 		INDEX name (chromosome, start)
 	)`, tName))
 	check(err)
